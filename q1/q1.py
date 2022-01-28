@@ -66,8 +66,11 @@ def get_book_info (con, isbn: str):
 def main ():
     con = sl.connect('q1.db')
     create_table_book(con)
-    # create_book_entries(con)
-    get_book_info(con, "1111111111")
+    if len(sys.argv) < 2:
+        create_book_entries(con)
+        print ("created some dummy entries for books")
+
+    get_book_info(con, sys.argv[1])
     # print("testing 1 2 ")
 
 
