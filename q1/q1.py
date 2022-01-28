@@ -49,7 +49,7 @@ def get_book_info (con, isbn: str):
         isbn_clean = isbn.strip().replace(" ", "").replace("-", "")
         # call the DB
         with con: 
-            data= con.execute("SELECT * FROM BOOK WHERE isbn = "+isbn_clean)
+            data= con.execute("SELECT * FROM BOOK WHERE isbn = ?", [isbn_clean])
             for row in data:
                 print(row)
     else:
@@ -69,8 +69,8 @@ def main ():
     if len(sys.argv) < 2:
         create_book_entries(con)
         print ("created some dummy entries for books")
-
-    get_book_info(con, sys.argv[1])
+    else:
+        get_book_info(con, sys.argv[1])
     # print("testing 1 2 ")
 
 
