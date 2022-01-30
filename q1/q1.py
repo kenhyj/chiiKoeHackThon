@@ -31,10 +31,9 @@ def create_book_entries(con):
     ]
     with con:
         con.executemany(sql, data)
-    print("todo")
 
 def check_isbn_format(isbn: str):
-    """
+    """ (str) -> boolean
     do not include any spaces
     isbn is 10 digit before 2007 o.w. 13 digits
     """
@@ -56,12 +55,24 @@ def get_book_info (con, isbn: str):
         print("Please check your isbn format")
         isbn_clean = isbn.strip().replace(" ", "").replace("-", "")
         if (not isbn_clean.isdecimal()): 
-            print("your isbn includes a non numeric character")
+            print("your isbn includes a non numeric character. \n Please not that dashes and spaces will be automatically omitted.")
         if (10 == len(isbn_clean) or 13 == len(isbn_clean)):
             print("your isbn has to include 10 or 13 numeric characters")
 
-    def store_N_books (): 
-        print ("brb")
+def store_N_books (n=1: int): 
+    """
+    Write a wrapper function that increase performance by keeping results
+    in memory for the quick look up. To prevent memory from growing unbounded,
+    we only want to store a maximum of N book records. At any given time, 
+    we should be storing the N books that accessed most recently. 
+    Assume that N can be a large number when choosing data structure(s) and
+    algorithm(s)
+    """
+    if (n < 1):
+        print ("store at least 1 book")
+        return
+        
+    print ("brb")
 
 def main ():
     con = sl.connect('q1.db')

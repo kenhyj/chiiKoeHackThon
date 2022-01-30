@@ -4,13 +4,15 @@
 to run this project, 
 please run in the terminal
 ```
-python q1.py ISBN
+cd q1
+python q1.py _ISBN_
 ```
 
 eg. 
 ```
 python q1.py 0000000000
 ```
+The _ISBN_ can include dashes and white spaces, the functions will automatically rid of the white spaces and dashes for its own ease of use.
 
 If there are no responses, it is probably because the table includes no dummy entries.
 To make dummy entries, run the following command line
@@ -32,3 +34,9 @@ This will create (isbn , title, author, language).
 
 ## Q2 NEXT.JS USING TYPESCRIPT
 to run this project, 
+```
+cd q2/q2
+npm run dev 
+```
+
+open http://localhost:3000
