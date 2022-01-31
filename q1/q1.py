@@ -59,7 +59,7 @@ def get_book_info (con, isbn: str):
         if (10 == len(isbn_clean) or 13 == len(isbn_clean)):
             print("your isbn has to include 10 or 13 numeric characters")
 
-def store_N_books (n=1: int): 
+def store_N_books (n = 1 ): 
     """
     Write a wrapper function that increase performance by keeping results
     in memory for the quick look up. To prevent memory from growing unbounded,
