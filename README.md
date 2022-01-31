@@ -32,7 +32,7 @@ This will create (isbn , title, author, language).
 
 
 
-## Q2 NEXT.JS USING TYPESCRIPT
+## Q2 NEXT.JS USING JAVASCRIPT
 to run this project, 
 ```
 cd q2/q2
