@@ -4,7 +4,7 @@
 to run this project, 
 please run in the terminal
 ```
-cd q1
+cd PROJECT_ROOT/q1
 python q1.py _ISBN_
 ```
 
@@ -33,10 +33,19 @@ This will create (isbn , title, author, language).
 
 
 ## Q2 NEXT.JS USING JAVASCRIPT
-to run this project, 
+
+### Deployed on Netlify
+
+
+### Alternatively, 
+
+For the for time install all necessary dependencies
 ```
-cd q2/q2
+cd PROJECT_ROOT/q2/q2
+```
+to run this project , 
+```
+cd PROJECT_ROOT/q2/q2
 npm run dev 
 ```
-
-open http://localhost:3000
+go to http://localhost:3000
