@@ -34,10 +34,7 @@ This will create (isbn , title, author, language).
 
 ## Q2 NEXT.JS USING JAVASCRIPT
 
-### Deployed on Netlify
-https://admiring-wing-1521e0.netlify.app
-
-### Alternatively, 
+### Running locally, 
 
 For the for time install all necessary dependencies
 ```
