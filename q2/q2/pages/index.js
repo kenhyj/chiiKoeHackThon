@@ -21,6 +21,10 @@ let dummy_entries = [
   { uuid: "222-222-2223", company: "Wish", product: "Earpods", stars: 3 }
 ]
 
+function updateStars() {
+
+}
+
 function TableStar() {
   return (
     <Table>
@@ -58,11 +62,11 @@ export default function Home() {
 
       <main>
         <h1 className="title">
-          Welcome!
+          Rate Widget
         </h1>
 
         <p className="description">
-          Get started by editing
+          Welcome! Please Rate the Products
           {/* <code>pages/index.js</code> */}
         </p>
 
