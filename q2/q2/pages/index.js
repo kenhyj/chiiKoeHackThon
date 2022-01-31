@@ -14,18 +14,42 @@ import TableRow from '@mui/material/TableRow';
 import Stars from "../component/Stars";
 
 // in case i want  to use a uuid npm geneator https://www.npmjs.com/package/uuid
-let dummy_entries = [
+let d_entries = [
   { uuid: "000-000-0000", company: "Elfster", product: "Ergonomic mouse pad", stars: 0 },
   { uuid: "000-000-0001", company: "Amazon", product: "Red Dragon Keyboard", stars: 5 },
   { uuid: "111-111-1112", company: "Ebay", product: "Logitech Optical Mouse", stars: 2 },
   { uuid: "222-222-2223", company: "Wish", product: "Earpods", stars: 3 }
 ]
 
-function updateStars() {
-
+function updateStars(prevEntries, id, etoile) {
+  // really gonna be slow since this isn't a db nor a backend supported widge, but i've got no choice
+  const newEntries = [];
+  for (const i = 0 ; i<prevEntries.length ; i++ ) {
+    let newEntry = prevEntries[i];
+    if (prevEntries[i]["uuid"] === id) {
+      newEntry = {...newEntry, "stars": etoile };
+    } 
+    newEntries.push(newEntry);
+  }
+  return newEntries;
 }
 
 function TableStar() {
+
+  const [dummy_entries, setDummyEntries] = useState([
+    { uuid: "000-000-0000", company: "Elfster", product: "Ergonomic mouse pad", stars: 0 },
+    { uuid: "000-000-0001", company: "Amazon", product: "Red Dragon Keyboard", stars: 5 },
+    { uuid: "111-111-1112", company: "Ebay", product: "Logitech Optical Mouse", stars: 2 },
+    { uuid: "222-222-2223", company: "Wish", product: "Earpods", stars: 3 }
+  ]);
+
+  const shootingStars = (id, hoshi) => {
+    setDummyEntries(
+      updateStars(dummy_entries, id, hoshi)
+    )
+  }
+
+
   return (
     <Table>
       <TableHead>
@@ -41,7 +65,7 @@ function TableStar() {
             <TableRow key={row.uuid}>
               <TableCell>{row.company}</TableCell>
               <TableCell>{row.product}</TableCell>
-              <TableCell><Stars stars={row.stars} /></TableCell>
+              <TableCell><Stars stars={row.stars} uuid={row.uuid} update={shootingStars}/></TableCell>
             </TableRow>
           )
           )

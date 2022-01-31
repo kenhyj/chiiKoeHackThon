@@ -10,6 +10,8 @@ import { grey } from '@mui/material/colors';
 
 import Rating from '@mui/material/Rating';
 
+import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
+
 import { styled } from '@mui/material/styles';
 
 const StyledRating = styled(Rating)({
@@ -22,27 +24,11 @@ const StyledRating = styled(Rating)({
   });
 
 
-import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
-
-const theme = createTheme({
-    components: {
-      // Name of the component
-      MuiRating: {
-        styleOverrides: {
-          // Name of the slot
-          iconFilled: {color: "green"},
-          iconEmpty: {color: "white"},
-        },
-      },
-    },
-  });
-
-
 export default function Stars(props) {
-    const blackStar = [...Array(props.stars)].map((e, i) => <IconButton> <StarIcon style={{ color: "black" }} theme={theme} /> </IconButton>);
+    const blackStar = [...Array(props.stars)].map((e, i) => <IconButton> <StarIcon style={{ color: "black" }} /> </IconButton>);
     const whiteStar = [...Array(5 - props.stars)].map((e, i) => <IconButton > <StarBorderTwoToneIcon /> </IconButton>);
 
-    const greyStar = [...Array(props.stars)].map((e, i) => <IconButton> <StarIcon style={{color: grey[500] }} theme={theme}/> </IconButton>);
+    const greyStar = [...Array(props.stars)].map((e, i) => <IconButton> <StarIcon style={{color: grey[500] }} /> </IconButton>);
 
     // const oneLineStar = [...Array(5)].map((e, i) => props.stars > i ? <StarIcon />: <StarBorderTwoToneIcon/>);
     return (
@@ -50,6 +36,9 @@ export default function Stars(props) {
             <StyledRating
                 value={props.stars}
                 precision={0.5}
+                onChange={(event, newValue) => {
+                    props.update(props.uuid, newValue);
+                  }}
             />
             {/*
             {blackStar}
