@@ -39,6 +39,7 @@ This will create (isbn , title, author, language).
 For the for time install all necessary dependencies
 ```
 cd PROJECT_ROOT/q2/q2
+npm install
 ```
 to run this project , 
 ```
