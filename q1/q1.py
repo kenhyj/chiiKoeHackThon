@@ -41,30 +41,6 @@ def check_isbn_format(isbn: str):
     isbn_clean = isbn.strip().replace(" ", "").replace("-", "")
     return ( 10 == len(isbn_clean) or 13 == len(isbn_clean) ) and (isbn_clean.isdecimal())
 
-
-def get_book_info (con: Connection, isbn: str):
-    """
-    """
-    if (check_isbn_format(isbn)):
-        isbn_clean = isbn.strip().replace(" ", "").replace("-", "")
-        
-        # call the DB
-        with con: 
-            data= con.execute("SELECT * FROM BOOK WHERE isbn = ?", [isbn_clean])
-            for row in data:
-                book = row
-                print(row)
-        return book
-    else:
-        print("Please check your isbn format")
-        isbn_clean = isbn.strip().replace(" ", "").replace("-", "")
-        if (not isbn_clean.isdecimal()): 
-            print("your isbn includes a non numeric character. \n Please not that dashes and spaces will be automatically omitted.")
-        if (10 == len(isbn_clean) or 13 == len(isbn_clean)):
-            print("your isbn has to include 10 or 13 numeric characters")
-
-memoryBook = {}
-
 # decorator
 def store_books ( func ): 
     """
@@ -77,15 +53,45 @@ def store_books ( func ):
     """
     # wrapper
     def wrapper(*args, **kwargs):
-        func(*args, **kwargs)
-        if len(memoryBook) > 100: # N = 100 here
+        book = func(*args, **kwargs)
+        if (len(book) > 0):
+            memoryBook.update( {book[1]: book } )
+            print(book)
+        else:
+            print("No Book Found by that ISBN")
+        if len(memoryBook) > 50: # N = 50 here
             # https://stackoverflow.com/questions/1756992/how-to-remove-the-oldest-element-from-a-dictionary
             memoryBook.pop(next(iter(memoryBook)))
+        
     return wrapper
 
-@store_books    
-def store( book ):
-    memoryBook.update( {book[1]: book } )
+@store_books
+def get_book_info (con: Connection, isbn: str):
+    """
+    """
+    if (check_isbn_format(isbn)):
+        isbn_clean = isbn.strip().replace(" ", "").replace("-", "")
+        book = ()
+        # call the DB
+        with con: 
+            data= con.execute("SELECT * FROM BOOK WHERE isbn = ?", [isbn_clean])
+            for row in data:
+                book = row
+                # print(row)
+        # print(book)
+        # print(type(book))
+        # print(len(book))
+        return book
+    else:
+        print("Please check your isbn format")
+        isbn_clean = isbn.strip().replace(" ", "").replace("-", "")
+        if (not isbn_clean.isdecimal()): 
+            print("your isbn includes a non numeric character. \n Please not that dashes and spaces will be automatically omitted.")
+        if (10 == len(isbn_clean) or 13 == len(isbn_clean)):
+            print("your isbn has to include 10 or 13 numeric characters")
+
+memoryBook = {}
+   
 
 def main ():
     con = sl.connect('q1.db')
@@ -94,12 +100,11 @@ def main ():
         create_book_entries(con)
         print ("created some dummy entries for books")
     else:
-        book=get_book_info(con, sys.argv[1])
-
-    store(book) # 
-    for x in memoryBook:
-        print (x)
-
+        get_book_info(con, sys.argv[1])
+    # for x in memoryBook:
+    #     print("memBook")
+    #     print (x)
+    #     print(memoryBook.get(x))
 
 main()
 
