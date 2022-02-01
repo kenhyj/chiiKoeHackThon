@@ -36,7 +36,7 @@ This will create (isbn , title, author, language).
 
 ### Running locally, 
 
-For the for time install all necessary dependencies
+For the first time, install all necessary dependencies
 ```
 cd PROJECT_ROOT/q2/q2
 npm install
